@@ -18,11 +18,14 @@
 #include <iomanip>       // setfill(), setw()
 #include <list>
 #include <cmath>	// pow
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #ifndef BIGINT
 #define BIGINT
 
-const int DIGITS_PER_BLOCK = 3;
+const int DIGITS_PER_BLOCK = 1;
 
 const int MODULUS = (short int)pow(10.0, DIGITS_PER_BLOCK);
 
@@ -92,7 +95,7 @@ class BigInt
 
 
 	/***** compare operator *****/
-	BigInt BigInt::operator>(BigInt largenumber);
+	bool BigInt::operator>(BigInt largenumber);
 	/*------------------------------------------------------------------------
 		Add two BigInts.
 

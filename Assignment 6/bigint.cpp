@@ -107,8 +107,6 @@ BigInt BigInt::operator+(BigInt addend2)
    return sum;
 }
 
-
-
 //---- Def of subtract operator
 BigInt BigInt::operator-(BigInt subtract2) 
 {
@@ -152,12 +150,13 @@ BigInt BigInt::operator-(BigInt subtract2)
 }
 
 //---- Def of greater than operator
-BigInt BigInt::operator>(BigInt largenumber)
+bool BigInt::operator>(BigInt largenumber)
 {
 	BigInt compare;
 	short int first,             // a block of 1st number (this object)
 		second,                 // a block of 2nd number (largenumber)
-		result,                 // a block in their compairison
+		result,  
+		result2,// a block in their compairison
 		carry = 0;
 
 	list<short int>::reverse_iterator
@@ -173,6 +172,7 @@ BigInt BigInt::operator>(BigInt largenumber)
 		}
 		else
 			first = 0;
+
 		if (it2 != largenumber.myList.rend())
 		{
 			second = *it2;
@@ -180,28 +180,21 @@ BigInt BigInt::operator>(BigInt largenumber)
 		}
 		else
 			second = 0;
-		if ((first > second) && (carry == 0))
+		
+		result = first % 1000;
+		result2 = second % 1000;
+
+		if (result > result2) 
 		{
-			return first;
+		compare.myList.push_front(result);
+		return result;
 		}
 		else
 		{
-			return second;
+			compare.myList.push_front(result2);
+			return result2;
 		}
-		
-		short int temp = first - second - carry;
-		result = temp % 1000;
-		carry = temp / 1000;
-		compare.myList.push_front(result);
 	}
-
-	if (carry > 0)
-	{
-		compare.myList.push_front(carry);
-		return compare;
-		
-	}
-	return compare;
 }
 
 //---- Def of multiplication operator
